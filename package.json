@@ -1,19 +1,19 @@
 {
-  "author": "Dean Merchant <deanmerchant@gmail.com.com> (http://github.com/Dean177)",
+  "author": "Wisnu Pramadhitya Ramadhan <wisnuprama014@gmail.com> (http://github.com/Dean177)",
   "bugs": {
-    "url": "https://github.com/Dean177/react-native-json-tree/issues"
+    "url": "https://github.com/wisnuprama/react-native-json-tree/issues"
   },
   "contributors": [
     "andytompkins",
     "jsdario",
     "patw0929",
-    "Swaagie"
+    "Swaagie",
+    "Dean177"
   ],
   "dependencies": {
-    "prop-types": "^15.6.0",
-    "react-base16-styling": "github:dean177/react-base16-styling#fbc6593"
+    "prop-types": "^15.7.2"
   },
-  "description": "React Native JSON viewing component, based on react-json-tree",
+  "description": "React Native JSON viewing component, based on react-native-json-tree but without theme",
   "devDependencies": {
     "babel-eslint": "^7.2.2",
     "babel-preset-react-native": "4.0.0",
@@ -26,10 +26,10 @@
     "expect": "1.20.2",
     "immutable": "3.8.1",
     "jest": "21.2.1",
-    "react": "16.0.0-alpha.12",
-    "react-native": "0.48.4"
+    "react": "16.13.1",
+    "react-native": "0.59.9"
   },
-  "homepage": "https://github.com/Dean177/react-native-json-tree",
+  "homepage": "https://github.com/wisnuprama/react-native-json-tree",
   "keywords": [
     "react",
     "react-native",
@@ -46,7 +46,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Dean177/react-native-json-tree.git"
+    "url": "https://github.com/wisnuprama/react-native-json-tree.git"
   },
   "scripts": {
     "flow": "flow",

@@ -1,7 +1,6 @@
-import { createStyling } from 'react-base16-styling';
-import solarized from './themes/solarized';
+import solarized from "./themes/solarized";
 
-const colorMap = theme => ({
+const colorMap = (theme) => ({
   ARROW_COLOR: theme.base0D,
   BACKGROUND_COLOR: theme.base00,
   BOOLEAN_COLOR: theme.base09,
@@ -18,7 +17,7 @@ const colorMap = theme => ({
   UNDEFINED_COLOR: theme.base08,
 });
 
-const valueColorMap = colors => ({
+const valueColorMap = (colors) => ({
   Boolean: colors.BOOLEAN_COLOR,
   Date: colors.DATE_COLOR,
   Function: colors.FUNCTION_COLOR,
@@ -29,8 +28,8 @@ const valueColorMap = colors => ({
   Undefined: colors.UNDEFINED_COLOR,
 });
 
-const getStylingFromBase16 = (base16Theme) => {
-  const colors = colorMap(base16Theme);
+const getStylingFromBase16 = () => {
+  const colors = colorMap(solarized);
 
   return {
     tree: {
@@ -40,7 +39,7 @@ const getStylingFromBase16 = (base16Theme) => {
 
     value: ({ style }) => ({
       style: {
-        flexDirection: 'row',
+        flexDirection: "row",
         marginLeft: 10,
         ...style,
       },
@@ -48,7 +47,7 @@ const getStylingFromBase16 = (base16Theme) => {
 
     label: {
       color: colors.LABEL_COLOR,
-      flexDirection: 'row',
+      flexDirection: "row",
     },
 
     valueLabel: {
@@ -82,15 +81,15 @@ const getStylingFromBase16 = (base16Theme) => {
       style: {
         fontSize: 15,
         marginLeft: 0,
-        transform: expanded ? [{ rotate: '90deg' }] : [{ rotate: '0deg' }],
+        transform: expanded ? [{ rotate: "90deg" }] : [{ rotate: "0deg" }],
         ...style,
       },
     }),
 
     arrowContainer: ({ style }, arrowStyle) => ({
       style: {
-        flexDirection: 'row',
-        paddingLeft: arrowStyle === 'double' ? 5 : 0,
+        flexDirection: "row",
+        paddingLeft: arrowStyle === "double" ? 5 : 0,
         paddingRight: 3,
         ...style,
       },
@@ -111,7 +110,9 @@ const getStylingFromBase16 = (base16Theme) => {
 
     nestedNodeItemString: ({ style }, keyPath, nodeType, expanded) => ({
       style: {
-        color: expanded ? colors.ITEM_STRING_EXPANDED_COLOR : colors.ITEM_STRING_COLOR,
+        color: expanded
+          ? colors.ITEM_STRING_EXPANDED_COLOR
+          : colors.ITEM_STRING_COLOR,
         marginLeft: 5,
         ...style,
       },
@@ -126,8 +127,35 @@ const getStylingFromBase16 = (base16Theme) => {
   };
 };
 
-const createStylingFromTheme = createStyling(getStylingFromBase16, {
-  defaultBase16: solarized,
-});
+/**
+ * temp solution to disable theming
+ */
+const createStylingFromTheme = () => {
+  const styles = getStylingFromBase16();
+  return (styleKeys, ...args) => {
+    let style = {};
+    if(Array.isArray(styleKeys)) {
+      styleKeys.forEach((styleKey) => {
+        const styleValue = styles[styleKey];
+        if (typeof styleValue === 'function') {
+          style = {
+            ...style,
+            // empty context
+            ...styleValue({}, ...args),
+          };
+        }
+      })
+    } else {
+      const styleValue = styles[styleKeys];
+      if (typeof styleValue === 'function') {
+        style = {
+          ...style,
+          ...styleValue(...args),
+        };
+      }
+    }
+    return style;
+  };
+};
 
 export default createStylingFromTheme;
