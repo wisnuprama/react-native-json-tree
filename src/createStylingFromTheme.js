@@ -134,20 +134,20 @@ const createStylingFromTheme = () => {
   const styles = getStylingFromBase16();
   return (styleKeys, ...args) => {
     let style = {};
-    if(Array.isArray(styleKeys)) {
+    if (Array.isArray(styleKeys)) {
       styleKeys.forEach((styleKey) => {
         const styleValue = styles[styleKey];
-        if (typeof styleValue === 'function') {
+        if (typeof styleValue === "function") {
           style = {
             ...style,
             // empty context
             ...styleValue({}, ...args),
           };
         }
-      })
+      });
     } else {
       const styleValue = styles[styleKeys];
-      if (typeof styleValue === 'function') {
+      if (typeof styleValue === "function") {
         style = {
           ...style,
           ...styleValue(...args),

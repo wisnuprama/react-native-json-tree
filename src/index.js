@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Text, View } from 'react-native';
-import JSONNode from './JSONNode';
-import createStylingFromTheme from './createStylingFromTheme';
+import React from "react";
+import PropTypes from "prop-types";
+import { Text, View } from "react-native";
+import JSONNode from "./JSONNode";
+import createStylingFromTheme from "./createStylingFromTheme";
 
-const identity = value => value;
+const identity = (value) => value;
 
 class JSONTree extends React.Component {
   static propTypes = {
@@ -16,7 +16,9 @@ class JSONTree extends React.Component {
       PropTypes.string,
     ]).isRequired,
     hideRoot: PropTypes.bool,
-    keyPath: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+    keyPath: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    ),
     postprocessValue: PropTypes.func,
     sortObjectKeys: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   };
@@ -24,8 +26,12 @@ class JSONTree extends React.Component {
   static defaultProps = {
     shouldExpandNode: (keyName, data, level) => level === 0, // expands root by default,
     hideRoot: false,
-    keyPath: ['root'],
-    getItemString: (type, data, itemType, itemString) => <Text>{itemType} {itemString}</Text>,
+    keyPath: ["root"],
+    getItemString: (type, data, itemType, itemString) => (
+      <Text>
+        {itemType} {itemString}
+      </Text>
+    ),
     labelRenderer: ([label]) => <Text>{label}:</Text>,
     valueRenderer: identity,
     postprocessValue: identity,
@@ -46,7 +52,7 @@ class JSONTree extends React.Component {
     const styling = createStylingFromTheme();
 
     return (
-      <View {...styling('tree')}>
+      <View {...styling("tree")}>
         <JSONNode
           hideRoot={hideRoot}
           keyPath={hideRoot ? [] : keyPath}
