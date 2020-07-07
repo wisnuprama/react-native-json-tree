@@ -2,7 +2,6 @@ import solarized from "./themes/solarized";
 
 const colorMap = (theme) => ({
   ARROW_COLOR: theme.base0D,
-  BACKGROUND_COLOR: theme.base00,
   BOOLEAN_COLOR: theme.base09,
   DATE_COLOR: theme.base0B,
   FUNCTION_COLOR: theme.base08,
@@ -33,7 +32,6 @@ const getStylingFromBase16 = () => {
 
   return {
     tree: {
-      backgroundColor: colors.BACKGROUND_COLOR,
       padding: 5,
     },
 
