@@ -5,7 +5,7 @@ import JSONTree from 'react-native-json-tree';
 import Heading from './Heading';
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, backgroundColor: '#333' },
   title: { margin: 10 },
 });
 
