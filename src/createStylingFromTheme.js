@@ -130,29 +130,35 @@ const getStylingFromBase16 = () => {
  */
 const createStylingFromTheme = () => {
   const styles = getStylingFromBase16();
+
+  function setStyle(styleRef, styleKey, ...args) {
+    let newStyle = { ...styleRef };
+    const styleValue = styles[styleKey];
+    if (typeof styleValue === "function") {
+      newStyle = {
+        ...newStyle,
+        // empty context
+        ...styleValue({}, ...args).style,
+      };
+    } else {
+      newStyle = {
+        ...newStyle,
+        ...styleValue,
+      };
+    }
+    return newStyle;
+  }
+
   return (styleKeys, ...args) => {
     let style = {};
     if (Array.isArray(styleKeys)) {
       styleKeys.forEach((styleKey) => {
-        const styleValue = styles[styleKey];
-        if (typeof styleValue === "function") {
-          style = {
-            ...style,
-            // empty context
-            ...styleValue({}, ...args),
-          };
-        }
+        style = setStyle(style, styleKey, ...args);
       });
     } else {
-      const styleValue = styles[styleKeys];
-      if (typeof styleValue === "function") {
-        style = {
-          ...style,
-          ...styleValue(...args),
-        };
-      }
+      style = setStyle(style, styleKeys, ...args);
     }
-    return style;
+    return { style };
   };
 };
 
